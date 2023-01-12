@@ -1,2 +1,2 @@
-# repo-java-template
-Template para repositorio em java
+# People-API
+Gerencie pessoas com esta api.
