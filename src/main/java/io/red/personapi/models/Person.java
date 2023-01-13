@@ -1,5 +1,7 @@
 package io.red.personapi.models;
 
+import io.red.personapi.controllers.responses.PersonResponse;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,10 @@ public class Person {
         this.address = address;
     }
 
+    public Person(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,5 +53,11 @@ public class Person {
 
     public List<Address> getAddress() {
         return address;
+    }
+
+    public PersonResponse toResponse() {
+        return new PersonResponse(
+                this.name
+        );
     }
 }
