@@ -13,3 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Create person's address;
 * List person's address;
 * Set main person's main address;
+
+## [0.0.1]() - 2023-01-12
+### Added
+* H2 database;
+* Person model/table;
+* Address model/table;
