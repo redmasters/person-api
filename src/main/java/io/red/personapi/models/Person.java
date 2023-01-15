@@ -3,6 +3,7 @@ package io.red.personapi.models;
 import io.red.personapi.controllers.responses.PersonResponse;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -68,8 +69,22 @@ public class Person {
     }
 
     public PersonResponse toResponse() {
-        return new PersonResponse(
-                this.name
+        List<PersonResponse.Address> addresses = new ArrayList<>();
+        this.getAddress().forEach(address ->
+                addresses.add(new PersonResponse.Address(
+                        address.getId(),
+                        address.getStreet(),
+                        address.getPostalCode(),
+                        address.getNumber(),
+                        address.getCity()
+                ))
         );
+
+        return new PersonResponse(
+                this.id,
+                this.name,
+                this.birthDate.toString(),
+                addresses
+                );
     }
 }
