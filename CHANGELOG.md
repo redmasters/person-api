@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 * Search a person;
-* List persons;
 * List person's address;
 * Set main person's main address;
+
+## [0.4.0]() - 2020-05-15
+### Added
+* List persons;
 
 ## [0.3.0]() - 2020-05-15
 ### Added
