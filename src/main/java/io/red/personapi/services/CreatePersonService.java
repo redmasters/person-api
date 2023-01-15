@@ -7,6 +7,7 @@ import io.red.personapi.repositories.AddressRepository;
 import io.red.personapi.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CreatePersonService {
 
     public Person create(PersonRequest request) {
         final var namePerson = request.name();
-        final var birthDate = request.birthDate();
+        final var birthDate = Date.valueOf(request.birthDate());
 
         List<Address> addressList = new ArrayList<>();
         request.address().forEach(address ->

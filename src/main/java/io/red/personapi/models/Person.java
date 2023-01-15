@@ -35,6 +35,12 @@ public class Person {
         this.address = address;
     }
 
+    public Person(Long id, String name, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
     public Person(String name, Date birthDate, List<Address> address) {
         this.name = name;
         this.birthDate = birthDate;
