@@ -1,4 +1,4 @@
-package io.red.personapi;
+package io.red.personapi.repositories;
 
 import io.red.personapi.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

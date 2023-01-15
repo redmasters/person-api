@@ -4,7 +4,6 @@ import io.red.personapi.controllers.requests.PersonRequest;
 import io.red.personapi.controllers.responses.PersonResponse;
 import io.red.personapi.services.CreatePersonService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
