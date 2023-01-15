@@ -2,6 +2,9 @@ package io.red.personapi.services;
 
 import io.red.personapi.controllers.responses.PersonResponse;
 import io.red.personapi.repositories.PersonRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,8 +18,8 @@ public class ListPersonService {
         this.personRepository = personRepository;
     }
 
-    public List<PersonResponse> listAllPersons() {
-        final var personList = personRepository.findAll();
+    public Page<PersonResponse> listAllPersons(Pageable page) {
+        final var personList = personRepository.findAll(page);
         List<PersonResponse> responseList = new ArrayList<>();
 
         personList.forEach(person -> {
@@ -44,7 +47,7 @@ public class ListPersonService {
                 }
         );
 
-        return responseList;
+        return new PageImpl<>(responseList, page, personList.getSize());
 
     }
 }
