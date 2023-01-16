@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.EAGER;
 @Table(name = "tbl_person")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id")
     private Long id;
     @Column(name = "person_name")
