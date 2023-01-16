@@ -1,6 +1,8 @@
 package io.red.personapi.services;
 
 import io.red.personapi.controllers.responses.PersonResponse;
+import io.red.personapi.exceptions.PersonException;
+import io.red.personapi.models.Person;
 import io.red.personapi.repositories.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,19 +24,29 @@ public class ListPersonService {
         final var personList = personRepository.findAll(page);
         List<PersonResponse> responseList = new ArrayList<>();
 
-        personList.forEach(person -> {
-            String birthDate = person.getBirthDate() == null ? "" : person.getBirthDate().toString();
-                    List<PersonResponse.Address> addressList = new ArrayList<>();
+        getPaginatedPersonList(personList, responseList);
 
-                    person.getAddress().forEach(address ->
-                            addressList.add(new PersonResponse.Address(
-                                    address.getId(),
-                                    address.getStreet(),
-                                    address.getPostalCode(),
-                                    address.getNumber(),
-                                    address.getCity()
-                            ))
-                    );
+        return new PageImpl<>(responseList, page, personList.getSize());
+
+    }
+
+    public PersonResponse listById(Long id) {
+        final var person = personRepository.findById(id).
+                orElseThrow(PersonException::new);
+        var addressList = getAddressList(person);
+
+        return new PersonResponse(
+                person.getId(),
+                person.getName(),
+                person.getBirthDate().toString(),
+                addressList
+        );
+    }
+
+    private static void getPaginatedPersonList(Page<Person> personList, List<PersonResponse> responseList) {
+        personList.forEach(person -> {
+                    String birthDate = person.getBirthDate() == null ? "" : person.getBirthDate().toString();
+                    var addressList = getAddressList(person);
 
                     responseList.add(
                             new PersonResponse(
@@ -42,12 +54,24 @@ public class ListPersonService {
                                     person.getName(),
                                     birthDate,
                                     addressList
-                                    )
+                            )
                     );
                 }
         );
+    }
 
-        return new PageImpl<>(responseList, page, personList.getSize());
+    private static List<PersonResponse.Address> getAddressList(Person person) {
+        List<PersonResponse.Address> addressList = new ArrayList<>();
 
+        person.getAddress().forEach(address ->
+                addressList.add(new PersonResponse.Address(
+                        address.getId(),
+                        address.getStreet(),
+                        address.getPostalCode(),
+                        address.getNumber(),
+                        address.getCity()
+                ))
+        );
+        return addressList;
     }
 }
