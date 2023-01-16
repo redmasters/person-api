@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 *.mv.db
 !**/src/main/**/build/
+hs_err_pid**
 !**/src/test/**/build/
 
 ### STS ###
