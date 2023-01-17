@@ -14,6 +14,7 @@ public record PersonResponse(
             String street,
             String postalCode,
             String number,
-            String city
+            String city,
+            boolean mainAdress
     ){}
 }

@@ -63,13 +63,14 @@ public class ListPersonService {
     private static List<PersonResponse.Address> getAddressList(Person person) {
         List<PersonResponse.Address> addressList = new ArrayList<>();
 
-        person.getAddress().forEach(address ->
+        person.getAddressList().forEach(address ->
                 addressList.add(new PersonResponse.Address(
                         address.getId(),
                         address.getStreet(),
                         address.getPostalCode(),
                         address.getNumber(),
-                        address.getCity()
+                        address.getCity(),
+                        address.isMain()
                 ))
         );
         return addressList;
