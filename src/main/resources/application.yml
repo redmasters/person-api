@@ -2,14 +2,11 @@ spring:
   application:
     name: person-api
   datasource:
-    url: jdbc:h2:file:./person-api
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: 'jdbc:postgresql://containers-us-west-157.railway.app:5838/railway'
+    username: '${PGUSER}'
+    password: '${PGPASSWORD}'
+    driver-class-name: org.postgresql.Driver
 
-  h2:
-    console:
-      enabled: true
   jpa:
     hibernate:
       ddl-auto: update
