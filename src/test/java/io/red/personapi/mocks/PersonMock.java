@@ -28,7 +28,7 @@ public class PersonMock {
         return new PersonRequest(
                 "Doe",
                 "2021-01-01",
-                List.of(AddressMock.createAddress())
+                List.of(AddressMock.createAddressRequest())
         );
     }
 
