@@ -5,7 +5,8 @@ public record AddressRequest(
         String postalCode,
         String number,
         String city,
-        boolean mainAdress
-
+        boolean mainAddress,
+        Long personId
 ) {
+
 }

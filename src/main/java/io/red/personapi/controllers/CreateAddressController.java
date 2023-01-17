@@ -1,14 +1,14 @@
 package io.red.personapi.controllers;
 
-import io.red.personapi.controllers.requests.AddressRequest;
+import io.red.personapi.controllers.requests.AddressDataRequest;
 import io.red.personapi.controllers.responses.AddressResponse;
 import io.red.personapi.services.CreateAddressPersonService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,8 +22,7 @@ public class CreateAddressController {
     }
 
     @PostMapping("/address")
-    public ArrayList<AddressResponse> createAddress(List<AddressRequest> request,
-                                                    @RequestParam(name = "personId") Long personId) {
-        return service.createAdress(request, personId);
+    public List<AddressResponse> createAddress(@RequestBody @Valid AddressDataRequest request) {
+        return service.createAdress(request);
     }
 }

@@ -19,6 +19,9 @@ public class Address {
     private String city;
     @Column(name = "address_main")
     private boolean isMain = true;
+    @Column(name = "fktbl_personaddress_id")
+    private Long personId;
+
 
     public Address() {
     }
@@ -40,12 +43,13 @@ public class Address {
         this.city = city;
     }
 
-    public Address(String street, String postalCode, String number, String city, boolean isMain) {
+    public Address(String street, String postalCode, String number, String city, boolean isMain, Long personId) {
         this.street = street;
         this.postalCode = postalCode;
         this.number = number;
         this.city = city;
         this.isMain = isMain;
+        this.personId = personId;
     }
 
     public Long getId() {
@@ -66,5 +70,13 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public boolean isMain() {
+        return isMain;
     }
 }

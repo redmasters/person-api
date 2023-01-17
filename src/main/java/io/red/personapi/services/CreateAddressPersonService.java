@@ -1,10 +1,9 @@
 package io.red.personapi.services;
 
-import io.red.personapi.controllers.requests.AddressRequest;
+import io.red.personapi.controllers.requests.AddressDataRequest;
 import io.red.personapi.controllers.responses.AddressResponse;
 import io.red.personapi.exceptions.PersonException;
 import io.red.personapi.models.Address;
-import io.red.personapi.models.Person;
 import io.red.personapi.repositories.AddressRepository;
 import io.red.personapi.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -22,47 +21,37 @@ public class CreateAddressPersonService {
         this.personRepository = personRepository;
     }
 
-    public ArrayList<AddressResponse> createAdress(List<AddressRequest> request, Long personId) {
-        var addressList = new ArrayList<Address>();
-        var person = personRepository.findById(personId)
-                .orElseThrow(() -> new PersonException());
-        var addressResponseList = new ArrayList<AddressResponse>();
+    public List<AddressResponse> createAdress(AddressDataRequest request) {
 
-        saveAddressUpdatePerson(request, addressList, person);
+        List<Address> addressModelList = new ArrayList<>();
+        List<AddressResponse> responseList = new ArrayList<>();
 
+        request.addressList().forEach(address -> {
+            var person = personRepository.findById(request.personId())
+                    .orElseThrow(PersonException::new);
 
-        addressList.forEach(address ->
-                addressResponseList.add(new AddressResponse(
-                        person.getId(),
-                        address.getId(),
-                        address.getStreet(),
-                        address.getPostalCode(),
-                        address.getNumber(),
-                        address.getCity()
-                ))
-        );
+            var addressModel = new Address(
+                    address.street(),
+                    address.postalCode(),
+                    address.number(),
+                    address.city(),
+                    address.mainAddress(),
+                    person.getId()
+            );
+            addressModelList.add(addressModel);
+            responseList.add(new AddressResponse(
+                    addressModel.getPersonId(),
+                    addressModel.getStreet(),
+                    addressModel.getPostalCode(),
+                    addressModel.getNumber(),
+                    addressModel.getCity(),
+                    addressModel.isMain()
+            ));
+        });
 
-        return addressResponseList;
+        addressRepository.saveAll(addressModelList);
 
-    }
-
-    private void saveAddressUpdatePerson(List<AddressRequest> request, ArrayList<Address> addressList, Person person) {
-        request.forEach(address ->
-                addressList.add(
-                        addressRepository.save(new Address(
-                                address.street(),
-                                address.postalCode(),
-                                address.number(),
-                                address.city()
-                        ))));
-
-        final var personAddressUpdated = new Person(
-                person.getId(),
-                person.getName(),
-                person.getBirthDate(),
-                addressList
-        );
-        personRepository.save(personAddressUpdated);
+        return responseList;
     }
 
 }

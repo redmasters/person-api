@@ -24,16 +24,16 @@ public class Person {
 
     @OneToMany(cascade = ALL, fetch = EAGER)
     @JoinColumn(name = "fktbl_personaddress_id")
-    private List<Address> address;
+    private List<Address> addressList;
 
     public Person() {
     }
 
-    public Person(Long id, String name, Date birthDate, List<Address> address) {
+    public Person(Long id, String name, Date birthDate, List<Address> addressList) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
-        this.address = address;
+        this.addressList = addressList;
     }
 
     public Person(Long id, String name, Date birthDate) {
@@ -42,10 +42,10 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public Person(String name, Date birthDate, List<Address> address) {
+    public Person(String name, Date birthDate, List<Address> addressList) {
         this.name = name;
         this.birthDate = birthDate;
-        this.address = address;
+        this.addressList = addressList;
     }
 
     public Person(String name) {
@@ -64,19 +64,21 @@ public class Person {
         return birthDate;
     }
 
-    public List<Address> getAddress() {
-        return address;
+    public List<Address> getAddressList() {
+        return addressList;
     }
 
     public PersonResponse toResponse() {
         List<PersonResponse.Address> addresses = new ArrayList<>();
-        this.getAddress().forEach(address ->
+        this.getAddressList().forEach(address ->
                 addresses.add(new PersonResponse.Address(
                         address.getId(),
                         address.getStreet(),
                         address.getPostalCode(),
                         address.getNumber(),
-                        address.getCity()
+                        address.getCity(),
+                        address.isMain()
+
                 ))
         );
 
