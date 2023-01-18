@@ -1,14 +1,15 @@
 package io.red.personapi.services;
 
 import io.red.personapi.controllers.requests.MainAddressRequest;
-import io.red.personapi.controllers.responses.AddressResponse;
-import io.red.personapi.models.Address;
 import io.red.personapi.repositories.AddressRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SetMainAdressService implements MainAddressInterface {
     private final AddressRepository addressRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SetMainAdressService.class);
 
     public SetMainAdressService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
@@ -27,6 +28,8 @@ public class SetMainAdressService implements MainAddressInterface {
                     if (address.getAddressId().equals(request.addressId())) {
                         address.setMain(true);
 
+
+                        LOGGER.info("Main address ID: {} is now set", address.getAddressId());
                         addressRepository.save(address);
                     }
                 }
