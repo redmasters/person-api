@@ -9,7 +9,14 @@ import java.util.List;
 
 public class PersonMock {
 
-    public static Person createPerson() {
+
+    public static Person createOnlyName() {
+        return new Person(
+                "Doe"
+        );
+    }
+
+    public static Person createPerson(){
         return new Person(
                 1L,
                 "Doe",
@@ -18,17 +25,11 @@ public class PersonMock {
         );
     }
 
-    public static Person createOnlyName() {
-        return new Person(
-                "Doe"
-        );
-    }
-
     public static PersonRequest request(){
         return new PersonRequest(
                 "Doe",
                 "2021-01-01",
-                List.of(AddressMock.createAddress())
+                List.of(AddressMock.createAddressRequest())
         );
     }
 
