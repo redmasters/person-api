@@ -79,4 +79,8 @@ public class Address {
     public boolean isMain() {
         return isMain;
     }
+
+    public void setMain(boolean main) {
+        isMain = main;
+    }
 }
