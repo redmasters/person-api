@@ -14,7 +14,7 @@ RUN gradle clean build
 
 # actual container
 FROM openjdk:17-alpine
-ENV ARTIFACT_NAME=spent-1.9.0.jar
+ENV ARTIFACT_NAME=person-api-1.0.0.jar
 ENV APP_HOME=/usr/app/
 
 WORKDIR $APP_HOME
