@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 * Search a person;
 
+## [0.8.0]() - 2023-05-17
+### Added
+* Create a person Test;
+
 ## [0.7.0]() - 2023-05-17
-## Added
+### Added
 * Logger on requests
 
 ## [0.6.0]() - 2023-05-17
