@@ -25,7 +25,8 @@ public class UpdatePersonService {
         final var updatedPerson = new Person(
                 personToUpdate.getPersonId(),
                 request.name(),
-                Date.valueOf(request.birthDate())
+                Date.valueOf(request.birthDate()),
+                personToUpdate.getAddressList()
                 );
 
         LOGGER.info("Person ID: {} updated", updatedPerson.getPersonId());

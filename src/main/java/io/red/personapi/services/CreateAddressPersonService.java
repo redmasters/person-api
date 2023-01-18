@@ -17,7 +17,7 @@ import java.util.List;
 public class CreateAddressPersonService {
     private final AddressRepository addressRepository;
     private final PersonRepository personRepository;
-    private final static Logger LOGGER = LoggerFactory.getLogger(CreateAddressPersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAddressPersonService.class);
 
     public CreateAddressPersonService(AddressRepository addressRepository, PersonRepository personRepository) {
         this.addressRepository = addressRepository;

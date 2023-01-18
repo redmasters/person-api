@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class ListPersonService {
     private final PersonRepository personRepository;
-    private final static Logger LOGGER = LoggerFactory.getLogger(ListPersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListPersonService.class);
 
     public ListPersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -26,7 +26,7 @@ public class ListPersonService {
     public Page<PersonResponse> listAllPersons(Pageable page) {
         final var personList = personRepository.findAll(page);
 
-        LOGGER.info("Found {} person(s)", personList.getSize());
+        LOGGER.info("Found {} person(s)", personList.getTotalElements());
         List<PersonResponse> responseList = new ArrayList<>();
 
         getPaginatedPersonList(personList, responseList);
