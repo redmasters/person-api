@@ -16,7 +16,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id")
-    private Long id;
+    private Long personId;
     @Column(name = "person_name")
     private String name;
     @Column(name = "person_birth_date")
@@ -29,15 +29,15 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long id, String name, Date birthDate, List<Address> addressList) {
-        this.id = id;
+    public Person(Long personId, String name, Date birthDate, List<Address> addressList) {
+        this.personId = personId;
         this.name = name;
         this.birthDate = birthDate;
         this.addressList = addressList;
     }
 
-    public Person(Long id, String name, Date birthDate) {
-        this.id = id;
+    public Person(Long personId, String name, Date birthDate) {
+        this.personId = personId;
         this.name = name;
         this.birthDate = birthDate;
     }
@@ -52,8 +52,8 @@ public class Person {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPersonId() {
+        return personId;
     }
 
     public String getName() {
@@ -72,7 +72,7 @@ public class Person {
         List<PersonResponse.Address> addresses = new ArrayList<>();
         this.getAddressList().forEach(address ->
                 addresses.add(new PersonResponse.Address(
-                        address.getId(),
+                        address.getAddressId(),
                         address.getStreet(),
                         address.getPostalCode(),
                         address.getNumber(),
@@ -83,7 +83,7 @@ public class Person {
         );
 
         return new PersonResponse(
-                this.id,
+                this.personId,
                 this.name,
                 this.birthDate.toString(),
                 addresses

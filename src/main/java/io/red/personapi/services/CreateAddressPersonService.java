@@ -36,7 +36,7 @@ public class CreateAddressPersonService {
                     address.number(),
                     address.city(),
                     address.mainAddress(),
-                    person.getId()
+                    person.getPersonId()
             );
             addressModelList.add(addressModel);
             responseList.add(new AddressResponse(

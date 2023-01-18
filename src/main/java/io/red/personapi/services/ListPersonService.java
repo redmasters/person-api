@@ -36,7 +36,7 @@ public class ListPersonService {
         var addressList = getAddressList(person);
 
         return new PersonResponse(
-                person.getId(),
+                person.getPersonId(),
                 person.getName(),
                 person.getBirthDate().toString(),
                 addressList
@@ -50,7 +50,7 @@ public class ListPersonService {
 
                     responseList.add(
                             new PersonResponse(
-                                    person.getId(),
+                                    person.getPersonId(),
                                     person.getName(),
                                     birthDate,
                                     addressList
@@ -65,7 +65,7 @@ public class ListPersonService {
 
         person.getAddressList().forEach(address ->
                 addressList.add(new PersonResponse.Address(
-                        address.getId(),
+                        address.getAddressId(),
                         address.getStreet(),
                         address.getPostalCode(),
                         address.getNumber(),
