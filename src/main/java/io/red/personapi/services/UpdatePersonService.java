@@ -22,7 +22,7 @@ public class UpdatePersonService {
                 .orElseThrow(PersonException::new);
 
         final var updatedPerson = new Person(
-                personToUpdate.getId(),
+                personToUpdate.getPersonId(),
                 request.name(),
                 Date.valueOf(request.birthDate())
                 );
