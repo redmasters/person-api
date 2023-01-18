@@ -4,6 +4,8 @@ import io.red.personapi.controllers.responses.PersonResponse;
 import io.red.personapi.exceptions.PersonException;
 import io.red.personapi.models.Person;
 import io.red.personapi.repositories.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 public class ListPersonService {
     private final PersonRepository personRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListPersonService.class);
 
     public ListPersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -22,6 +25,8 @@ public class ListPersonService {
 
     public Page<PersonResponse> listAllPersons(Pageable page) {
         final var personList = personRepository.findAll(page);
+
+        LOGGER.info("Found {} person(s)", personList.getTotalElements());
         List<PersonResponse> responseList = new ArrayList<>();
 
         getPaginatedPersonList(personList, responseList);
@@ -35,6 +40,7 @@ public class ListPersonService {
                 orElseThrow(PersonException::new);
         var addressList = getAddressList(person);
 
+        LOGGER.info("Listing {} info", person.getName());
         return new PersonResponse(
                 person.getPersonId(),
                 person.getName(),

@@ -6,6 +6,8 @@ import io.red.personapi.exceptions.PersonException;
 import io.red.personapi.models.Address;
 import io.red.personapi.repositories.AddressRepository;
 import io.red.personapi.repositories.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 public class CreateAddressPersonService {
     private final AddressRepository addressRepository;
     private final PersonRepository personRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAddressPersonService.class);
 
     public CreateAddressPersonService(AddressRepository addressRepository, PersonRepository personRepository) {
         this.addressRepository = addressRepository;
@@ -26,6 +29,7 @@ public class CreateAddressPersonService {
         List<Address> addressModelList = new ArrayList<>();
         List<AddressResponse> responseList = new ArrayList<>();
 
+        LOGGER.info("Saving {} address(es)", request.addressList().size());
         request.addressList().forEach(address -> {
             var person = personRepository.findById(request.personId())
                     .orElseThrow(PersonException::new);
@@ -38,6 +42,9 @@ public class CreateAddressPersonService {
                     address.mainAddress(),
                     person.getPersonId()
             );
+
+            LOGGER.info("Address set for {}", person.getName());
+
             addressModelList.add(addressModel);
             responseList.add(new AddressResponse(
                     addressModel.getPersonId(),
@@ -49,6 +56,7 @@ public class CreateAddressPersonService {
             ));
         });
 
+        LOGGER.info("{} address(es) saved", addressModelList.size());
         addressRepository.saveAll(addressModelList);
 
         return responseList;
