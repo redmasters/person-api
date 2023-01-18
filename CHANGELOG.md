@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 * Search a person;
 
+## [1.0.0]() - 2023-05-17
+### Added
+* Release public API;
+* Docker compose;
+* Swagger;
+
 ## [0.8.0]() - 2023-05-17
 ### Added
 * Create a person Test;

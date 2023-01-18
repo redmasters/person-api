@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  api:
+    container_name: spent-app
+    image: spent:1.9.0
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - /tmp/_cache:/app/_cache
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/spent-app
+      SPRING_DATASOURCE_USERNAME: spent-app
+      SPRING_DATASOURCE_PASSWORD: spent-app
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
