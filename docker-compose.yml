@@ -3,7 +3,7 @@ version: '3.1'
 services:
   api:
     container_name: person-app
-    image: person:1.0.0
+    image: person-api:1.0.0
     expose:
       - 8080
     ports:
